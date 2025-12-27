@@ -120,7 +120,7 @@ footer{
 
     <form action="save.php" method="POST" onsubmit="return validateForm()">
       <input type="text" name="nom" id="nom" placeholder="Nom complet">
-      <input type="text" name="telephone" id="telephone" placeholder="Téléphone">
+      <input type="text" name="telephone" id="telephone" placeholder="Téléphone" maxlength="10">
 
       <select name="service">
         <option>Coiffure</option>
@@ -128,8 +128,8 @@ footer{
         <option>Soins</option>
       </select>
 
-      <input type="date" name="date">
-      <input type="time" name="heure">
+      <input type="date" name="date" min="<?php echo date('Y-m-d'); ?>">
+       <input type="time" name="heure">
 
       <button type="submit">Réserver</button>
     </form>
