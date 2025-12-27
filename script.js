@@ -1,26 +1,26 @@
- function validateForm(){
-      let nom = document.getElementById("nom").value;
-      let tel = document.getElementById("telephone").value;
+function validateForm() {
+  let nom = document.getElementById("nom").value;
+  let tel = document.getElementById("telephone").value;
 
-      if(nom=="" || tel==""){
-        showErrorAlert("Veuillez remplir tous les champs obligatoires.");
-        return false;
-      }
-      if(isNaN(tel)){
-        showErrorAlert("le numéro de téléphone doit contenir uniquement des chiffres.");
-        return false;
-      }
-      return true;
-    }
+  if (nom == "" || tel == "") {
+    showErrorAlert("Veuillez remplir tous les champs obligatoires.");
+    return false;
+  }
+  if (isNaN(tel)) {
+    showErrorAlert("Le numéro de téléphone doit contenir uniquement des chiffres.");
+    return false;
+  }
+  return true;
+}
 
-    window.onload = function() {
+window.onload = function() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("success") === "1") {
     showSuccessAlert();
   }
 }
 
-    function showSuccessAlert() {
+function showSuccessAlert() {
   const confirmationDiv = document.getElementById('confirmation');
   if (confirmationDiv) {
     confirmationDiv.innerHTML = `
@@ -36,7 +36,29 @@
     setTimeout(() => {
       confirmationDiv.style.display = 'none';
     }, 5000);
+
+    history.replaceState(null, null, window.location.pathname);
   }
 }
 
+function showErrorAlert(message) {
+  const confirmationDiv = document.getElementById('confirmation');
+  if (confirmationDiv) {
+    confirmationDiv.innerHTML = `
+      Erreur : ${message}
+      <span id="close-error-alert" style="float: right; cursor: pointer; font-weight: bold;"> &times;</span>
+    `;
+    confirmationDiv.style.display = 'block';
+    confirmationDiv.classList.add('error');  
 
+    document.getElementById('close-error-alert').addEventListener('click', function() {
+      confirmationDiv.style.display = 'none';
+      confirmationDiv.classList.remove('error');
+    });
+
+    setTimeout(() => {
+      confirmationDiv.style.display = 'none';
+      confirmationDiv.classList.remove('error');
+    }, 5000);
+  }
+}
