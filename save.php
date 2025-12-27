@@ -11,7 +11,7 @@ $sql = "INSERT INTO reservations (nom, telephone, service, date_rdv, heure)
         VALUES ('$nom', '$telephone', '$service', '$date', '$heure')";
 
 if (mysqli_query($conn, $sql)) {
-  header("Location: index.php");
+  header("Location: index.php?success=1");  
 } else {
   echo "Erreur lors de l'enregistrement";
 }
